@@ -8,7 +8,7 @@
         select count(*) from heimadianping.tb_follow where user_id=#{userid} and  follow_user_id=#{followid}
 
     </select>
-    <select id="selectfollowersbyid" resultType="com.hmdp.entity.Follow">
+    <select id="selectfollowersbyid" resultType="com.redis_demo.entity.Follow">
         select * from heimadianping.tb_follow where follow_user_id=#{followuserid}
     </select>
 </mapper>
