@@ -34,7 +34,11 @@ public class ShopController {
     @GetMapping("/{id}")
     public Result queryShopById(@PathVariable("id") Long id) {
 
-        return Result.ok(shopService.querygetById(id));
+        Shop shop = shopService.queryShopById(id);
+        if (shop == null) {
+            return Result.fail("店铺不存在");
+        }
+        return Result.ok(shop);
     }
 
     /**
