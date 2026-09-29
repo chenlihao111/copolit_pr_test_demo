@@ -21,9 +21,12 @@ public class RedisIdWorker {
 
         String date= nowtime.format(DateTimeFormatter.ofPattern("yyyy:MM:dd"));
         //序列号
-        long str=stringRedisTemplate.opsForValue().increment("icr"+prefix+":"+date);
+        Long sequence=stringRedisTemplate.opsForValue().increment("icr"+prefix+":"+date);
+        if (sequence == null) {
+            return null;
+        }
         //拼接
-        return Cursecond <<COUNT_BIT|str ;
+        return Cursecond <<COUNT_BIT|sequence;
     }
 
 }
