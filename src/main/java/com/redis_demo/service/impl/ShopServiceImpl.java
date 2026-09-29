@@ -46,7 +46,7 @@ public class ShopServiceImpl extends ServiceImpl<ShopMapper, Shop> implements IS
         //Shop shop = cacheClient.queryPassthrough(CACHE_SHOP_TTL,TimeUnit.MINUTES,
         // CACHE_SHOP_KEY, id,Shop.class,this::getById);
         Shop shop = cacheClient.QuerywithLogicExpire(CACHE_SHOP_KEY, LOCK_SHOP_KEY, id, Shop.class, this::getById,
-                20L, TimeUnit.SECONDS);
+                20L, TimeUnit.MINUTES);
         if (shop == null) {
             return Result.fail("店铺不存在");
         }
@@ -181,7 +181,7 @@ public class ShopServiceImpl extends ServiceImpl<ShopMapper, Shop> implements IS
             return Result.ok(page.getRecords());
         }
         //计算分页大小
-        int from = (current - 1) * SystemConstants.DEFAULT_PAGE_SIZE;
+        int from = (current - 1) * SystemConstants.DEFAULT_PAGE_SIZE + 1;
         int end = current * SystemConstants.DEFAULT_PAGE_SIZE;
         String key = SHOP_GEO_KEY + typeId;
         //redis分页查询
