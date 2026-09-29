@@ -17,6 +17,8 @@ jobs:
       - name: PR Agent
         uses: the-pr-agent/pr-agent@main
         env:
-          OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEEPSEEK.KEY: ${{ secrets.DEEPSEEK_KEY }}
+          config.model: "deepseek/deepseek-v4-pro"
+          config.fallback_models: '["deepseek/deepseek-v4-flash"]'
           pr_reviewer.extra_instructions: "分析本次改动对 main 分支中其他代码的影响，重点检查调用方、接口或返回值契约、错误处理和受影响的测试。"
